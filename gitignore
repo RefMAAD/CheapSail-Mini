@@ -1,0 +1,17 @@
+# PlatformIO build output and libraries (auto-downloaded on first build)
+.pio/
+
+# VS Code workspace settings
+.vscode/
+
+# Python cache
+*.pyc
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.orig
