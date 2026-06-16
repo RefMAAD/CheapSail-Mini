@@ -29,3 +29,6 @@ void send_gcode(const char* script);
 
 // Latest known printer state (updated automatically via WebSocket).
 extern PrinterState printer;
+
+// Device IP address — set after WiFi connects, used for OTA reference.
+extern String device_ip;

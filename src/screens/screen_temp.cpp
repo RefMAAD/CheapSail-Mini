@@ -76,7 +76,7 @@ static void make_heater_block(lv_obj_t* parent, int y, const char* heater_id, lv
     *cur_lbl_out = lv_label_create(card);
     lv_label_set_text(*cur_lbl_out, "0.0° / 0°");
     lv_obj_set_style_text_color(*cur_lbl_out, COL_TEXT, 0);
-    // Restored original suuri fontti lämpötiloille:
+    // Large font for temperature display
     lv_obj_set_style_text_font(*cur_lbl_out, &lv_font_montserrat_16, 0);
     lv_obj_set_pos(*cur_lbl_out, 8, 20);
 

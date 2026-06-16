@@ -1,6 +1,7 @@
 #include <lvgl.h>
 #include "../wifi_comms.h"
 #include "../battery.h"
+#include "../../include/config.h"
 
 extern PrinterState printer;
 
@@ -95,6 +96,13 @@ void screen_status_create(lv_obj_t* parent) {
     lv_obj_set_style_text_color(lbl_battery, COL_GREEN, 0);
     lv_obj_set_style_text_font(lbl_battery, &lv_font_montserrat_12, 0);
     lv_obj_align(lbl_battery, LV_ALIGN_LEFT_MID, 72, 0);
+
+    // IP address shown below title bar for OTA reference
+    lv_obj_t* lbl_ip = lv_label_create(parent);
+    lv_obj_set_style_text_color(lbl_ip, lv_color_hex(0x444466), 0);
+    lv_obj_set_style_text_font(lbl_ip, &lv_font_montserrat_10, 0);
+    lv_obj_set_pos(lbl_ip, 5, 44);
+    lv_label_set_text(lbl_ip, device_ip.c_str());
 
     // ── Temperature card ───────────────────────────────────────────────────────────
     lv_obj_t* c_temp = lv_obj_create(parent);

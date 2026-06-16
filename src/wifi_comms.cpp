@@ -6,6 +6,7 @@
 
 // ─── Global state ─────────────────────────────────────────────────────────────
 PrinterState printer;
+String device_ip = "connecting...";
 
 // ─── Internal variables ───────────────────────────────────────────────────────
 static WebSocketsClient ws;
@@ -112,7 +113,8 @@ void wifi_init() {
     }
 
     if (WiFi.status() == WL_CONNECTED) {
-        Serial.printf("\n[WiFi] IP: %s\n", WiFi.localIP().toString().c_str());
+        device_ip = WiFi.localIP().toString();
+        Serial.printf("\n[WiFi] IP: %s\n", device_ip.c_str());
     } else {
         Serial.println("\n[WiFi] connection failed");
     }

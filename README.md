@@ -1,10 +1,10 @@
-# CheapSail Mini — Beta 1.0r
+# CheapSail Mini — Beta 1.0r OTA
 
 A wireless Klipper touchscreen controller built on the ESP32-2432S022C  
 (CYD — Cheap Yellow Display).
 
 **Author:** [RefMAAD](https://github.com/RefMAAD)  
-**Version:** Beta 1.0r  
+**Version:** Beta 1.0r OTA  
 **License:** MIT
 
 > If you build on this project or publish a derivative work, a mention of the original author would be appreciated:  
@@ -16,6 +16,7 @@ A wireless Klipper touchscreen controller built on the ESP32-2432S022C
 ## Features
 
 - **WiFi** connection to Moonraker API via WebSocket
+- **OTA firmware updates** — flash wirelessly after first USB install, no cable needed
 - **5 tabs** navigated by swipe left/right
   - **Status** — temperatures, print progress, pause/resume/cancel
   - **Move** — manual axis jog, homing
@@ -54,7 +55,20 @@ A wireless Klipper touchscreen controller built on the ESP32-2432S022C
    ```
 4. Build once (✓ button) — this downloads all libraries
 5. Copy `include/lv_conf.h` to `.pio/libdeps/esp32dev/lvgl/lv_conf.h`
-6. Build and flash (→ button)
+6. Build and flash via USB (→ button)
+
+## OTA updates
+
+After the first USB flash, all future updates can be done wirelessly:
+
+1. Find the device IP on the Status screen
+2. Add to `platformio.ini`:
+   ```ini
+   upload_protocol = espota
+   upload_port     = 192.168.x.x
+   upload_flags    = --auth=cheapsail
+   ```
+3. Click upload (→) as normal — no USB cable needed
 
 ## Moonraker configuration
 
@@ -80,12 +94,13 @@ trusted_clients:
 CheapSail-Mini/
 ├── platformio.ini
 ├── include/
-│   ├── lv_conf.h       — LVGL configuration
-│   └── config.h        — Project-wide settings
+│   ├── lv_conf.h       — LVGL configuration (must copy to libdeps after clean build)
+│   └── config.h        — Project-wide settings and version
 └── src/
     ├── main.cpp         — LGFX, LVGL, swipe nav, splash screen
     ├── wifi_comms.h/.cpp — Moonraker WebSocket
     ├── battery.h        — IP5306 battery level
+    ├── ota.h            — OTA firmware update with progress UI
     └── screens/
         ├── screen_status.cpp
         ├── screen_move.cpp
@@ -108,6 +123,8 @@ Pull requests welcome! Ideas for future development:
 - Bed mesh visualisation
 - Print thumbnail display
 - Fan speed control
-- OTA firmware update
+- CheapSail Midi (3.5" ESP32-3248S035C) — coming soon
 
+## License
 
+MIT — free to use, modify and distribute.
